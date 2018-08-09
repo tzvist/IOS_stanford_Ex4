@@ -3,18 +3,16 @@
 #import "SetCardGameViewController.h"
 #import "SetCard.h"
 #import "SetCardDeck.h"
+#import "SetCardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SetCardGameViewController()
-
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardBottuns;
-
+@property (weak, nonatomic) IBOutlet SetCardView *CardView;
 @end
 
 @implementation SetCardGameViewController
 
-@dynamic cardBottuns;
 
 - (Deck *)creatDeck {
   return [[SetCardDeck alloc] init];
@@ -30,20 +28,20 @@ NS_ASSUME_NONNULL_BEGIN
   }
   return @"cardfront";
 }
-
-- (void)updateButton:(UIButton *)cardButton withCard:(Card*)card {
-  if (![card isKindOfClass:[SetCard class]]) {
-    return;
-  }
-  SetCard *setCard = (SetCard *)card;
-  [cardButton setAttributedTitle:[self cardConnten:setCard] forState:UIControlStateNormal];
-  
-  NSString *imageName = [self imageName:setCard];
-  UIImage *image = [UIImage imageNamed:imageName];
-
-  [cardButton setBackgroundImage:image forState:UIControlStateNormal];
-  cardButton.enabled = !setCard.isMatched;
-}
+//
+//- (void)updateButton:(UIButton *)cardButton withCard:(Card*)card {
+//  if (![card isKindOfClass:[SetCard class]]) {
+//    return;
+//  }
+//  SetCard *setCard = (SetCard *)card;
+//  [cardButton setAttributedTitle:[self cardConnten:setCard] forState:UIControlStateNormal];
+//
+//  NSString *imageName = [self imageName:setCard];
+//  UIImage *image = [UIImage imageNamed:imageName];
+//
+//  [cardButton setBackgroundImage:image forState:UIControlStateNormal];
+//  cardButton.enabled = !setCard.isMatched;
+//}
 
 - (NSArray<NSString *> *)validSymbols {
   return @[@"■",@"●",@"▲"];

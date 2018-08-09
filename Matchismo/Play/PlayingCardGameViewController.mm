@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
   [super viewDidLoad];
   
   self.playingCardView.suit = @"♦";
-  self.playingCardView.rank = 12;
+  self.playingCardView.rank = 4;
   self.playingCardView.faceUp = YES;
   
 }
@@ -55,7 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
   PlayingCard *playCard = (PlayingCard *)card;
   return [[NSAttributedString alloc] initWithString:playCard.contents];
 }
-
 
 - (NSString *)imageName:(PlayingCard *)playCard {
   if (playCard.isChosen) {

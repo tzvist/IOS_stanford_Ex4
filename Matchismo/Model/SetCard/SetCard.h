@@ -19,16 +19,16 @@ NS_ASSUME_NONNULL_BEGIN
 /// Number of options for each characteristics.
 + (NSUInteger)OptionsCount;
 
-/// SetCard number.
+/// \c SetCard number.
 @property (nonatomic, readonly) NSUInteger number;
 
-/// SetCard symbol.
+/// \c SetCard symbol.
 @property (nonatomic, readonly) NSUInteger symbol;
 
-/// SetCard shading.
+/// \c SetCard shading.
 @property (nonatomic, readonly) NSUInteger shading;
 
-/// SetCard color.
+/// \c SetCard color.
 @property (nonatomic, readonly) NSUInteger color;
 
 @end

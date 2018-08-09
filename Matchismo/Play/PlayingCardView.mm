@@ -62,21 +62,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Drawing
 
-#define DEFAULT_CORNER_FONT_STANDARD_HEIGHT 180.0
-#define DEFAULT_CORNER_RADIUS 12.0
-
-
-- (CGFloat)cornerScaleFactor {
-  return self.bounds.size.height / DEFAULT_CORNER_FONT_STANDARD_HEIGHT;
-}
-
-- (CGFloat) cornerRadius {
-  return DEFAULT_CORNER_RADIUS * [self cornerScaleFactor];
-}
-
-- (CGFloat)cornerOffset {
-  return [self cornerRadius] / 3.0;
-}
 
 - (void)drawRect:(CGRect)rect {
   UIBezierPath *margin = [UIBezierPath bezierPathWithRoundedRect:self.bounds
@@ -94,15 +79,15 @@ NS_ASSUME_NONNULL_BEGIN
   [self drawCorners];
   
   UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@", [self rankAsString], self.suit]];
-  CGFloat scaleFactor = 1.0 - self.faceCardScaleFactor;
-  
-  
   if (faceImage) {
+    CGFloat scaleFactor = 1.0 - self.faceCardScaleFactor;
     CGRect imageRect = CGRectInset(self.bounds,
                                 self.bounds.size.width * scaleFactor,
                                 self.bounds.size.height * scaleFactor);
     [faceImage drawInRect:imageRect];
     return;
+  } else {
+    [self drawPips];
   }
 }
 
@@ -129,18 +114,32 @@ NS_ASSUME_NONNULL_BEGIN
   [self popContext];
 }
 
+#define DEFAULT_CORNER_FONT_STANDARD_HEIGHT 180.0
+#define DEFAULT_CORNER_RADIUS 12.0
+
+- (CGFloat)cornerScaleFactor {
+  return self.bounds.size.height / DEFAULT_CORNER_FONT_STANDARD_HEIGHT;
+}
+
+- (CGFloat) cornerRadius {
+  return DEFAULT_CORNER_RADIUS * [self cornerScaleFactor];
+}
+
+- (CGFloat)cornerOffset {
+  return [self cornerRadius] / 3.0;
+}
+
 - (void)pushContextAndRotateUpsideDown {
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
   CGContextTranslateCTM(context, self.bounds.size.width, self.bounds.size.height);
-  CGContextRotateCTM(context, M_PI)
+  CGContextRotateCTM(context, M_PI);
 }
 
 - (void)popContext {
   CGContextRestoreGState(UIGraphicsGetCurrentContext());
 }
 
-/*
 #pragma mark - Pips
 
 #define PIP_HOFFSET_PERCENTAGE 0.165
@@ -177,46 +176,37 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
-
 #define PIP_FONT_SCALE_FACTOR 0.012
-
+#define ALMOST_ZERO 0.00000001
 - (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
-                      verticalOffset:(CGFloat)voffset
-                          upsideDown:(BOOL)upsideDown
-{
-  if (upsideDown) [self pushContextAndRotateUpsideDown];
+                      verticalOffset:(CGFloat)voffset {
   CGPoint middle = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
   UIFont *pipFont = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
   pipFont = [pipFont fontWithSize:[pipFont pointSize] * self.bounds.size.width * PIP_FONT_SCALE_FACTOR];
   NSAttributedString *attributedSuit = [[NSAttributedString alloc] initWithString:self.suit attributes:@{ NSFontAttributeName : pipFont }];
   CGSize pipSize = [attributedSuit size];
-  CGPoint pipOrigin = CGPointMake(
-                                  middle.x-pipSize.width/2.0-hoffset*self.bounds.size.width,
-                                  middle.y-pipSize.height/2.0-voffset*self.bounds.size.height
-                                  );
+  CGPoint pipOrigin = CGPointMake(middle.x-pipSize.width/2.0-hoffset*self.bounds.size.width,
+                               middle.y-pipSize.height/2.0-voffset*self.bounds.size.height  );
   [attributedSuit drawAtPoint:pipOrigin];
-  if (hoffset) {
-    pipOrigin.x += hoffset*2.0*self.bounds.size.width;
+  if (hoffset * hoffset > ALMOST_ZERO) {
+    pipOrigin.x = middle.x-pipSize.width/2.0+hoffset*self.bounds.size.width;
     [attributedSuit drawAtPoint:pipOrigin];
   }
-  if (upsideDown) [self popContext];
 }
 
 - (void)drawPipsWithHorizontalOffset:(CGFloat)hoffset
                       verticalOffset:(CGFloat)voffset
-                  mirroredVertically:(BOOL)mirroredVertically
-{
+                  mirroredVertically:(BOOL)mirroredVertically {
   [self drawPipsWithHorizontalOffset:hoffset
-                      verticalOffset:voffset
-                          upsideDown:NO];
+                      verticalOffset:voffset];
   if (mirroredVertically) {
+    [self pushContextAndRotateUpsideDown];
     [self drawPipsWithHorizontalOffset:hoffset
-                        verticalOffset:voffset
-                            upsideDown:YES];
+                        verticalOffset:voffset];
+    [self popContext];
   }
 }
- 
-  */
+
 @end
 
 NS_ASSUME_NONNULL_END
