@@ -46,25 +46,37 @@ NS_ASSUME_NONNULL_BEGIN
   CGPoint middle = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2);
   CGFloat hight = self.bounds.size.height;
   CGFloat diamondHight = hight/12.0;
-  CGFloat diamondlenght = self.bounds.size.width/DEFAULT_FACE_CARD_SCALE_FACTOR;
+  CGFloat diamondlenght = self.bounds.size.width * DEFAULT_FACE_CARD_SCALE_FACTOR;
   
   UIBezierPath *path = [[UIBezierPath alloc] init];
   
-  [path moveToPoint:CGPointMake(middle.x + diamondHight/2, middle.y )];
-  [path addLineToPoint:CGPointMake(middle.x , middle.y +diamondlenght/2)];
-  [path addLineToPoint:CGPointMake(middle.x - diamondHight/2, middle.y )];
-  [path addLineToPoint:CGPointMake(middle.x , middle.y -diamondlenght/2)];
-  [path addLineToPoint:CGPointMake(10, 150)];
-  //[path closePath];
+  [path moveToPoint:CGPointMake(middle.x , middle.y +diamondHight/2 )];
+  [path addLineToPoint:CGPointMake(middle.x + diamondlenght/2 , middle.y )];
+  [path addLineToPoint:CGPointMake(middle.x , middle.y - diamondHight/2)];
+  [path addLineToPoint:CGPointMake(middle.x - diamondlenght/2 , middle.y )];
+  [path closePath];
+  
+  [path addClip];
+  
+  
+  
+  UIBezierPath *line = [[UIBezierPath alloc] init];
+  
+  [path moveToPoint:CGPointMake(middle.x, 0)];
+  [path moveToPoint:CGPointMake(middle.x, self.bounds.size.height)];
+  
+  
+
+
+  
+  
+  
 
   [[UIColor greenColor] setFill];
   [[UIColor redColor] setStroke];
   [path fill];
   [path stroke];
 }
-
-
-
 
 - (void)pushContextAndRotateUpsideDown {
   CGContextRef context = UIGraphicsGetCurrentContext();
