@@ -3,14 +3,19 @@
 #import "SetCard.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface SetCard()
 
+/// \c SetCard number.
 @property (nonatomic, readwrite) NSUInteger number;
 
+/// \c SetCard symbol.
 @property (nonatomic, readwrite) NSUInteger symbol;
 
+/// \c SetCard shading.
 @property (nonatomic, readwrite) NSUInteger shading;
 
+/// \c SetCard color.
 @property (nonatomic, readwrite) NSUInteger color;
 
 @end
@@ -33,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)allDifferentArray:(NSArray *)numbers {
   for (int i = 0 ; i < numbers.count; i++) {
     long num1 = [numbers[i] longValue];
-    for (int j = 0 ; j< i; j++) {
+    for (int j = 0 ; j < i; j++) {
       long num2 = [numbers[j] longValue];
       if (num1 == num2) {
        return NO;
@@ -56,36 +61,21 @@ NS_ASSUME_NONNULL_BEGIN
   return ([self allEqualArray:numbers] || [self allDifferentArray:numbers]);
 }
 
-- (int)match:(NSArray *) otherCards {
-  NSMutableArray *characteristics = [[NSMutableArray alloc] init];
-  for (SetCard *card in otherCards) {
-    [characteristics addObject: @(card.number)];
-  }
-  if (! [self allEqualOrAllDifferentArray:characteristics]) {
+- (int)match:(NSArray *)otherCards {
+
+  if (![self allEqualOrAllDifferentArray:[otherCards valueForKey:@"number"]]) {
     return 0;
   }
-  [characteristics removeAllObjects];
   
-  for (SetCard *card in otherCards) {
-    [characteristics addObject: @(card.symbol)];
-  }
-  if (! [self allEqualOrAllDifferentArray:characteristics]) {
+  if (![self allEqualOrAllDifferentArray:[otherCards valueForKey:@"symbol"]]) {
     return 0;
   }
-  [characteristics removeAllObjects];
   
-  for (SetCard *card in otherCards) {
-    [characteristics addObject: @(card.shading)];
-  }
-  if (! [self allEqualOrAllDifferentArray:characteristics]) {
+  if (![self allEqualOrAllDifferentArray:[otherCards valueForKey:@"shading"]]) {
     return 0;
   }
-  [characteristics removeAllObjects];
   
-  for (SetCard *card in otherCards) {
-    [characteristics addObject: @(card.color)];
-  }
-  if (! [self allEqualOrAllDifferentArray:characteristics]) {
+  if (![self allEqualOrAllDifferentArray:[otherCards valueForKey:@"color"]]) {
     return 0;
   }
   return 1;
