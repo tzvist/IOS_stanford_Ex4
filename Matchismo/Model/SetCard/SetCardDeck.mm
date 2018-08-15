@@ -29,8 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
   }
   return self;
 }
-  
-  
+
 @end
 
 NS_ASSUME_NONNULL_END

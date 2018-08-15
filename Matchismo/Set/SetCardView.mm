@@ -5,6 +5,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SetCardView()
+
 /// \c SetCardView number.
 @property (nonatomic) NSUInteger number;
 
@@ -24,8 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define DEFAULT_FACE_CARD_SCALE_FACTOR 0.80
 
 #pragma mark - Initialization
-
-
 
 - (void)setup {
   self.backgroundColor = nil;

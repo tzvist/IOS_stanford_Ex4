@@ -5,7 +5,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 /// View for Set card.
 @interface SetCardView : UIView <CardView>
 

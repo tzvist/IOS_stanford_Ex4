@@ -1,6 +1,7 @@
 // Created by Tzvi Straus.
 
 #import "Deck.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// Object representing Deck of \c SetCard.

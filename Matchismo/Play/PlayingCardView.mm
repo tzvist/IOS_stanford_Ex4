@@ -4,7 +4,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface PlayingCardView()
 
 /// \c PlayCards Rank.
