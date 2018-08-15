@@ -211,7 +211,6 @@ NS_ASSUME_NONNULL_BEGIN
   self.isChosen = isChosen;
 }
 
-
 @end
 
 NS_ASSUME_NONNULL_END
