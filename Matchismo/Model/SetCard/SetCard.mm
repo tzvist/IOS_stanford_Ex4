@@ -78,6 +78,7 @@ NS_ASSUME_NONNULL_BEGIN
   if (![self allEqualOrAllDifferentArray:[otherCards valueForKey:@"color"]]) {
     return 0;
   }
+  
   return 1;
 }
 

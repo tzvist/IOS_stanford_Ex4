@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation Deck
 
-
 - (NSMutableArray *)cards {
   if (!_cards) {
     _cards = [[NSMutableArray alloc] init];
@@ -26,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable Card *)drawRandomCard {
-  if (!self.cards || self.cards.count == 0) {
+  if (!self.cards || 0 == self.cards.count) {
     return nil;
   }
   unsigned index = arc4random() % self.cards.count;

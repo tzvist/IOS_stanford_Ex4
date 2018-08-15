@@ -5,6 +5,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+/// View for Playing card.
 @interface PlayingCardView : UIView <CardView>
 
 /// Seter for view Card properties.

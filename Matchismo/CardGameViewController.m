@@ -135,7 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
   Grid *grid = [[Grid alloc] init];
   grid.size = self.cardHolder.frame.size;
   grid.minimumNumberOfCells = self.cardHolder.subviews.count;
-  grid.cellAspectRatio = 2.0/3.0;
+  grid.cellAspectRatio = 2.0 / 3.0;
   NSUInteger row = 0, column = 0;
   for (UIView *cardView in self.cardHolder.subviews) {
     CGRect currFram = [grid frameOfCellAtRow:row inColumn:column];
@@ -151,7 +151,6 @@ NS_ASSUME_NONNULL_BEGIN
     }
   }
 }
-
 
 @end
 

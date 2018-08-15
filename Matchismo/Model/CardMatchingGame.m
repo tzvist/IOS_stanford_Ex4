@@ -44,13 +44,14 @@ NS_ASSUME_NONNULL_BEGIN
                  usingDeck:(Deck *)deck
                  numCardMatchMode:(uint)numMode {
   assert(numMode >= 2);
-  //assert(numMode <= cardCount);
+  assert(numMode <= cardCount);
   
   if (self = [super init]) {
     _deck = deck;
     self.numCardMatchMode = numMode;
     [self addCards:cardCount];
   }
+  
   return self;
 }
 

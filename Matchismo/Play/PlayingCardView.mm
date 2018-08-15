@@ -13,8 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// \c PlayCards suit.
 @property (strong, nonatomic) NSString *suit;
 
-@property (nonatomic) CGFloat faceCardScaleFactor;
-
 @end
 
 @implementation PlayingCardView
@@ -24,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Initialization
 
 - (void)setup {
-  _faceCardScaleFactor = DEFAULT_FACE_CARD_SCALE_FACTOR;
   self.backgroundColor = nil;
   self.opaque = NO;
   self.contentMode = UIViewContentModeRedraw;
@@ -45,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Properties
 
 - (void)setFaceCardScaleFactor:(CGFloat)faceCardScaleFactor {
-  _faceCardScaleFactor = faceCardScaleFactor;
   [self setNeedsDisplay];
 }
 
@@ -59,7 +55,6 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - Drawing
-
 
 - (void)drawRect:(CGRect)rect {
   UIBezierPath *margin = [UIBezierPath bezierPathWithRoundedRect:self.bounds
@@ -78,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
   
   UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@", [self rankAsString], self.suit]];
   if (faceImage) {
-    CGFloat scaleFactor = 1.0 - self.faceCardScaleFactor;
+    CGFloat scaleFactor = 1.0 - DEFAULT_FACE_CARD_SCALE_FACTOR;
     CGRect imageRect = CGRectInset(self.bounds,
                                 self.bounds.size.width * scaleFactor,
                                 self.bounds.size.height * scaleFactor);

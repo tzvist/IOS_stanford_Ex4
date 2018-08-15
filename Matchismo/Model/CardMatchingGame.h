@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
                  numCardMatchMode:(uint)numMode
                  NS_DESIGNATED_INITIALIZER;
 
-/// Represents choosing a \c card , in the game.
+/// Represents choosing a \c card, in the game.
 /// If a match is found Returns the matching cards else returns nil.
 - (nullable NSArray<Card *> *)chooseCard:(Card *)card;
 
@@ -44,7 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Text description of the last result.
 @property (nonatomic, readonly) NSString *lastResultDescription;
-
 
 @end
 
