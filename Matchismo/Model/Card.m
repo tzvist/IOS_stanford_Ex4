@@ -10,6 +10,10 @@ NS_ASSUME_NONNULL_BEGIN
   return 0;
 }
 
+-(id) copyWithZone: (NSZone*) zone {
+  return self;
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

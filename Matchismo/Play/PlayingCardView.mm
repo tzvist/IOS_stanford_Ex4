@@ -51,8 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
   [self setNeedsDisplay];
 }
 
-- (void)setFaceUp:(BOOL)faceUp {
-  _faceUp = faceUp;
+- (void)setisChosen:(BOOL)isChosen {
+  _isChosen = isChosen;
   [self setNeedsDisplay];
 }
 
@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
                                             cornerRadius:[self cornerRadius]];
   [margin addClip];
   
-  if (!self.faceUp) {
+  if (!self.isChosen) {
     [[UIImage imageNamed:@"cardback"] drawInRect:self.bounds];
     return;
   }
@@ -205,6 +205,11 @@ NS_ASSUME_NONNULL_BEGIN
                         verticalOffset:voffset];
     [self popContext];
   }
+}
+
+#pragma mark - other
+-(id) copyWithZone:(NSZone *)zone {
+  return self;
 }
 
 @end

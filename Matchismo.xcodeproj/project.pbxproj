@@ -25,6 +25,7 @@
 		60ABEDF2211333C10080DD4E /* SetCardDeck.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60ABEDF0211333C10080DD4E /* SetCardDeck.mm */; };
 		60ABEDF5211341CE0080DD4E /* SetCardGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60ABEDF3211341CE0080DD4E /* SetCardGameViewController.mm */; };
 		60F3FF3F211B35CC00A5E7AC /* SetCardView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60F3FF3D211B35CC00A5E7AC /* SetCardView.mm */; };
+		60F3FF4A212071BE00A5E7AC /* Grid.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60F3FF48212071BE00A5E7AC /* Grid.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6010CA332122BBDA008E68F9 /* CardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		6010CA352122F16E008E68F9 /* CardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
 		603D35062107155200EF16C6 /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		603D35092107155200EF16C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		603D350A2107155200EF16C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -82,6 +85,8 @@
 		60ABEDF4211341CE0080DD4E /* SetCardGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCardGameViewController.h; sourceTree = "<group>"; };
 		60F3FF3D211B35CC00A5E7AC /* SetCardView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SetCardView.mm; sourceTree = "<group>"; };
 		60F3FF3E211B35CC00A5E7AC /* SetCardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCardView.h; sourceTree = "<group>"; };
+		60F3FF48212071BE00A5E7AC /* Grid.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Grid.mm; sourceTree = "<group>"; };
+		60F3FF49212071BE00A5E7AC /* Grid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +117,7 @@
 		603D34FD2107155200EF16C6 = {
 			isa = PBXGroup;
 			children = (
+				6010CA332122BBDA008E68F9 /* CardView.h */,
 				603D35082107155200EF16C6 /* Matchismo */,
 				603D35212107155200EF16C6 /* MatchismoTests */,
 				603D352C2107155200EF16C6 /* MatchismoUITests */,
@@ -137,6 +143,9 @@
 				60ABEDE62111DA710080DD4E /* Model */,
 				603D350C2107155200EF16C6 /* CardGameViewController.h */,
 				603D350D2107155200EF16C6 /* CardGameViewController.m */,
+				6010CA352122F16E008E68F9 /* CardView.h */,
+				60F3FF48212071BE00A5E7AC /* Grid.mm */,
+				60F3FF49212071BE00A5E7AC /* Grid.h */,
 				603D350F2107155200EF16C6 /* Main.storyboard */,
 				603D35122107155200EF16C6 /* Assets.xcassets */,
 				603D35172107155200EF16C6 /* Info.plist */,
@@ -373,6 +382,7 @@
 				60920FDB2108C48F004D5519 /* CardMatchingGame.m in Sources */,
 				60920FDE2109DEA1004D5519 /* Card.m in Sources */,
 				60920FD821087791004D5519 /* PlayingCardDeck.m in Sources */,
+				60F3FF4A212071BE00A5E7AC /* Grid.mm in Sources */,
 				603D350B2107155200EF16C6 /* AppDelegate.m in Sources */,
 				60401F212119B2D200FBD175 /* PlayingCardView.mm in Sources */,
 			);
@@ -536,14 +546,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT89APBF44;
 				INFOPLIST_FILE = Matchismo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Tzvi.Matchismo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -552,14 +564,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DT89APBF44;
 				INFOPLIST_FILE = Matchismo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = Tzvi.Matchismo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

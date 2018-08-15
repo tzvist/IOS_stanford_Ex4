@@ -1,36 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="41f-a9-Ov2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j5v-2x-Lho">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Set Card Game View Controller-->
-        <scene sceneID="rec-V9-OMh">
+        <scene sceneID="mhO-sJ-cD3">
             <objects>
-                <viewController id="41f-a9-Ov2" customClass="SetCardGameViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Xab-ba-9rb">
+                <viewController id="j5v-2x-Lho" customClass="SetCardGameViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="69n-E3-aTe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tgk-FY-oko" customClass="SetCardView">
-                                <rect key="frame" x="94" y="126" width="227" height="484"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p5D-pL-LbD">
+                                <rect key="frame" x="0.0" y="37" width="414" height="585"/>
+                                <color key="backgroundColor" red="0.31651041410000003" green="1" blue="0.53222588859999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZ2-Pp-qLo">
+                                <rect key="frame" x="309" y="686" width="85" height="30"/>
+                                <state key="normal" title="ADD CARDS"/>
+                                <connections>
+                                    <action selector="addThreeCards:" destination="j5v-2x-Lho" eventType="touchUpInside" id="KIu-XS-A2I"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOE-t9-UIg">
+                                <rect key="frame" x="26" y="687.66666666666663" width="62" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.1281659621" green="0.40493442359999998" blue="0.21551658339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <viewLayoutGuide key="safeArea" id="ith-8q-6vg"/>
+                        <constraints>
+                            <constraint firstItem="p5D-pL-LbD" firstAttribute="leading" secondItem="69n-E3-aTe" secondAttribute="leading" id="2cr-qc-GEg"/>
+                            <constraint firstItem="n6E-lJ-GJ3" firstAttribute="bottom" secondItem="GZ2-Pp-qLo" secondAttribute="bottom" constant="20" id="57U-ov-Ayn"/>
+                            <constraint firstItem="n6E-lJ-GJ3" firstAttribute="bottom" secondItem="p5D-pL-LbD" secondAttribute="bottom" constant="114" id="7b2-UG-PdA"/>
+                            <constraint firstItem="p5D-pL-LbD" firstAttribute="top" secondItem="n6E-lJ-GJ3" secondAttribute="top" constant="17" id="9Ds-aq-xiz"/>
+                            <constraint firstItem="vOE-t9-UIg" firstAttribute="leading" secondItem="n6E-lJ-GJ3" secondAttribute="leading" constant="26" id="GDA-ff-OV8"/>
+                            <constraint firstItem="p5D-pL-LbD" firstAttribute="width" secondItem="69n-E3-aTe" secondAttribute="width" id="UqB-xM-txd"/>
+                            <constraint firstItem="n6E-lJ-GJ3" firstAttribute="trailing" secondItem="GZ2-Pp-qLo" secondAttribute="trailing" constant="20" id="XAU-XW-eoo"/>
+                            <constraint firstItem="GZ2-Pp-qLo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="69n-E3-aTe" secondAttribute="leading" constant="20" symbolic="YES" id="Z30-tm-0ge"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vOE-t9-UIg" secondAttribute="trailing" constant="20" symbolic="YES" id="k8Q-Lm-V5J"/>
+                            <constraint firstItem="n6E-lJ-GJ3" firstAttribute="bottom" secondItem="vOE-t9-UIg" secondAttribute="bottom" constant="28" id="tgv-v7-K0d"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="n6E-lJ-GJ3"/>
                     </view>
+                    <connections>
+                        <outlet property="cardHolder" destination="p5D-pL-LbD" id="YNB-hh-vly"/>
+                        <outlet property="scoreLable" destination="vOE-t9-UIg" id="ggz-le-do8"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h6f-yJ-6zc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uiz-1b-x5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-494.20289855072468" y="-910.59782608695662"/>
+            <point key="canvasLocation" x="-1402.8985507246377" y="-1317.3913043478262"/>
         </scene>
     </scenes>
 </document>

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
   
   self.playingCardView.suit = @"♦";
   self.playingCardView.rank = 4;
-  self.playingCardView.faceUp = YES;
+  self.playingCardView.isChosen = YES;
   
 }
 - (Deck *)creatDeck {

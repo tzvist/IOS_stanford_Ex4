@@ -4,31 +4,77 @@
 #import "PlayingCardDeck.h"
 #import "Card.h"
 #import "CardMatchingGame.h"
+#import "Grid.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CardGameViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *lastResultDescription;
-
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardBottuns;
-
+/// Score lable.
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;
 
-/// Models \c game
-@property (strong, nonatomic) CardMatchingGame *game;
+/// View that holdes all the card views.
+@property (weak, nonatomic) IBOutlet UIView *cardHolder;
 
-@property (strong, nonatomic) NSAttributedString *resultDescriptions;
+/// Map card model to card view.
+@property (strong, nonatomic) NSMutableDictionary<Card *, UIView<CardView> *> *cardToView;
+
+/// Map card view to card model.
+@property (strong, nonatomic) NSMutableDictionary<UIView<CardView> *, Card *> *viewToCard;
 
 @end
 
 @implementation CardGameViewController
 
-- (CardMatchingGame *)game {
-  if (!_game) {
-    _game = [self createNewGame];
-  }
-  return _game;
+- (void)setup {
+  _game = [self createNewGame];
+}
+
+- (void)awakeFromNib {
+  [super awakeFromNib];
+  [self setup];
+}
+
+- (void)viewDidLoad {
+  [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+  [[NSNotificationCenter defaultCenter]
+   addObserver:self selector:@selector(updateCardsLocation)
+   name:UIDeviceOrientationDidChangeNotification
+   object:[UIDevice currentDevice]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [self updateAllCardViews];
+}
+
+- (void)updateAllCardViews {
+  [self removeAllCardViews];
+  [self resetData];
+  [self addCardViews:[self.game getCards]];
+}
+
+- (void)resetData {
+  _cardToView = [[NSMutableDictionary alloc] init];
+  _viewToCard = [[NSMutableDictionary alloc] init];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [self resetData];
+  [self removeAllCardViews];
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)removeAllCardViews {
+  [self.cardHolder.subviews
+   enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+     [obj removeFromSuperview];
+   }];
+}
+
+- (IBAction)redeal {
+  [self setup];
+  [self updateAllCardViews];
 }
 
 - (uint)calcCardMatchMode { // abstract method
@@ -47,71 +93,77 @@ NS_ASSUME_NONNULL_BEGIN
   assert(NO);
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-  if(!self.resultDescriptions) {
-    self.resultDescriptions = [[NSAttributedString alloc] init];
-  }
-  [self updateUI];
-}
-
 - (IBAction)changeCardMatchMode {
   self.game.numCardMatchMode = [self calcCardMatchMode];
 }
 
 - (CardMatchingGame *)createNewGame {
   Deck *deck = [self creatDeck];
-  NSUInteger cardCount = [self.cardBottuns count];
+  NSUInteger cardCount = 13;
   uint numCardMatchMode = [self calcCardMatchMode];
   
   return [[CardMatchingGame alloc] initWithCardCount:cardCount usingDeck:deck numCardMatchMode:numCardMatchMode];
 }
 
-- (IBAction)touchCardButton:(UIButton *)sender {
-  NSUInteger cardButtonIndex = [self.cardBottuns  indexOfObject:sender];
-  NSArray<Card *> *cards = [self.game chooseCardAtIndex:cardButtonIndex];
-  [self updateUI];
-  [self updateResultDescription:cards];
-}
-
-- (IBAction)redeal {
-  _game = nil;
-  self.resultDescriptions = [[NSAttributedString alloc] init];
-  [self updateUI];
-}
-
-- (void) updateUI {
-  for (NSUInteger cardButtonIndex = 0; cardButtonIndex < self.cardBottuns.count; cardButtonIndex++) {
-    Card *card = [self.game cardAtIndex:cardButtonIndex];
-    UIButton *cardButton = self.cardBottuns[cardButtonIndex];
-    [self updateButton:cardButton withCard:card];
+- (void)touchCardButton:(UITapGestureRecognizer *)gestureRecognizer {
+  UIView<CardView> *touchedCardView = (UIView<CardView> *)gestureRecognizer.view;
+  Card *touchedCard = self.viewToCard[touchedCardView];
+  NSArray<Card *> *matchingCards = [self.game chooseCard:touchedCard];
+  
+  
+  [self.cardToView enumerateKeysAndObjectsUsingBlock:^(Card * _Nonnull key, UIView<CardView> * _Nonnull obj, BOOL * _Nonnull stop) {
+    obj.isChosen = key.isChosen;
+  }];
+  
+  for (Card *matched in matchingCards) {
+    UIView<CardView> *matchedView = self.cardToView[matched];
+    [UIView animateWithDuration:3.0 delay:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{ matchedView.alpha = 0.0; }
+                     completion:^(BOOL fin) { if (fin) [matchedView removeFromSuperview]; }];
+    [self.cardToView removeObjectForKey:matched];
+    [self.viewToCard removeObjectForKey:matchedView];
   }
   self.scoreLable.text = [NSString stringWithFormat:@"Score: %ld", self.game.score];
-  self.lastResultDescription.text = @"";
 }
 
-- (void)updateResultDescription:(NSArray<Card *> *)cards {
-  NSMutableAttributedString *description = [self cardsConntens:cards];
-  self.lastResultDescription.text = @"";
-  if (self.game.lastResultDescription) {
-    NSMutableAttributedString *lastResultDescription = [[NSMutableAttributedString alloc] initWithString:self.game.lastResultDescription];
-    [description appendAttributedString:lastResultDescription];
-    [self.lastResultDescription setAttributedText:description];
-    
-    NSAttributedString *lineBreak = [[NSAttributedString alloc] initWithString:@"\n"];
-    NSMutableAttributedString *newResults = self.resultDescriptions.mutableCopy;
-    [newResults appendAttributedString:lineBreak];
-    [newResults appendAttributedString:description];
-    self.resultDescriptions = newResults;
-  }
-}
-
-- (NSMutableAttributedString *)cardsConntens:(NSArray<Card *> *)cards {
-  NSMutableAttributedString *cardNames = [[NSMutableAttributedString alloc] init];
+- (void)addCardViews:(NSArray *)cards {
   for (Card *card in cards) {
-    [cardNames appendAttributedString:[self cardConnten:card]];
+    UIView<CardView> *cardView = [self makeCardViewForCard:card];
+    [self.cardToView setObject:cardView forKey:card];
+    [self.viewToCard setObject:card forKey:cardView];
+    [self.cardHolder addSubview:cardView];
+    cardView.opaque = YES;
+    [cardView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchCardButton:) ]];
   }
-  return cardNames;
+  [self updateCardsLocation];
 }
+
+- (void)updateCardsLocation {
+  Grid *grid = [[Grid alloc] init];
+  grid.size = self.cardHolder.frame.size;
+  grid.minimumNumberOfCells = self.cardHolder.subviews.count;
+  grid.cellAspectRatio = 2.0/3.0;
+  NSUInteger row = 0, column = 0;
+  for (UIView *cardView in self.cardHolder.subviews) {
+    CGRect currFram = [grid frameOfCellAtRow:row inColumn:column];
+    [UIView animateWithDuration:3.0
+                          delay:0.0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{ [cardView setFrame:currFram]; }
+                     completion:nil];
+    column++;
+    if ([grid columnCount] == column){
+      column = 0;
+      row++;
+    }
+  }
+}
+
+- (UIView<CardView> *)makeCardViewForCard:(Card *)card {
+  assert(NO);
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -20,11 +20,21 @@ NS_ASSUME_NONNULL_BEGIN
                  numCardMatchMode:(uint)numMode
                  NS_DESIGNATED_INITIALIZER;
 
-/// Represents choosing a card \c index, in a card match.
-- (NSArray<Card *> *)chooseCardAtIndex:(NSUInteger) index;
+/// Represents choosing a \c card , in the game.
+/// If a match is found Returns the matching cards else returns nil.
+- (nullable NSArray<Card *> *)chooseCard:(Card *)card;
 
 /// Returns card at \c index.
 - (Card *)cardAtIndex:(NSUInteger) index;
+
+/// number of \c Cards in game.
+- (NSUInteger)cardsCount;
+
+/// Adds \c 3 \c Cards to the game;
+- (NSArray<Card *> *)addThreeCards;
+
+/// return list of cards used in the ggame.
+- (NSArray<Card *> *)getCards;
 
 /// Represents current \c score.
 @property (nonatomic, readonly) NSInteger score;

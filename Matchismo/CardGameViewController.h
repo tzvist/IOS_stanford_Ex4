@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import "CardMatchingGame.h"
 #import "Deck.h"
+#import "CardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,22 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// protected
 - (NSAttributedString *)cardConnten:(Card *)card;
+
+
+//--------------
+
+/// protected
+- (void)addCardViews:(NSArray *)cards;
+
+- (UIView<CardView> *)makeCardViewForCard:(Card *)card;
+
+/// protected
+- (void)updateAllCardViews;
+
+/// protected Models \c game.
+@property (strong, nonatomic) CardMatchingGame *game;
+
+
 
 @end
 

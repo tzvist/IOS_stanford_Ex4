@@ -1,22 +1,21 @@
 // Created by Tzvi Straus.
 
 #import <UIkit/UIkit.h>
+#import "CardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SetCardView : UIView
+@interface SetCardView : UIView <CardView>
 
-/// \c SetCardView number.
-@property (nonatomic) NSUInteger number;
+/// set faetures of thew \c SetCardView.
+- (void)setFeturesWithNumber:(NSUInteger)number
+                      symbol:(NSUInteger)symbol
+                     shading:(NSUInteger)shading
+                       color:(NSUInteger)color
+                    isChosen:(BOOL)isChosen;
 
-/// \c SetCardView symbol.
-@property (nonatomic) NSUInteger symbol;
-
-/// \c SetCardView shading.
-@property (nonatomic) NSUInteger shading;
-
-/// \c SetCardView color.
-@property (nonatomic) NSUInteger color;
+/// Is the card Chosen.
+@property (nonatomic) BOOL isChosen;
 
 @end
 

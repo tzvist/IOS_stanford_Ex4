@@ -6,19 +6,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CardMatchingGame()
 
+/// Represents current \c score.
 @property (nonatomic, readwrite) NSInteger score;
 
 /// List of cards to match.
-@property (nonatomic, strong) NSMutableArray<Card *> *cards; // of Card
+@property (nonatomic, strong) NSMutableArray<Card *> *cards;
 
 /// Queue conating currently chosen cards.
-@property (nonatomic, strong) NSMutableArray<Card *> *chosenCardsQueue; // of Card
+@property (nonatomic, strong) NSMutableArray<Card *> *chosenCardsQueue;
 
 @property (nonatomic, strong, readwrite) NSString *lastResultDescription;
+
+// A deck used draw cards from.
+@property (nonatomic, strong) Deck *deck;
 
 @end
 
 @implementation CardMatchingGame
+
+- (NSArray<Card *> *)addCards:(NSUInteger)cardCount {
+  NSMutableArray<Card *> *newCards = [[NSMutableArray alloc] init];
+  for (; 0 < cardCount; cardCount--) {
+    Card *card = [self.deck drawRandomCard];
+    if(card) {
+      [self.cards addObject:card];
+      [newCards addObject:card];
+    }
+  }
+  return newCards;
+}
+
+- (NSArray<Card *> *)addThreeCards {
+  return [self addCards:3];
+}
 
 - (instancetype)initWithCardCount:(NSUInteger)cardCount
                  usingDeck:(Deck *)deck
@@ -27,16 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
   //assert(numMode <= cardCount);
   
   if (self = [super init]) {
+    _deck = deck;
     self.numCardMatchMode = numMode;
-    
-    for (NSUInteger i = 0 ; i < cardCount; i++) {
-      Card *card = [deck drawRandomCard];
-      if(!card) {
-        self = nil;
-        return self;
-      }
-      [self.cards addObject:card];
-    }
+    [self addCards:cardCount];
   }
   return self;
 }
@@ -92,7 +105,6 @@ static const int COST_TO_CHOOSE = 1;
   for (Card * otherCard in self.chosenCardsQueue){
     otherCard.matched = YES;
   }
-  [self.chosenCardsQueue removeAllObjects];
 }
 
 - (void)calScore:(uint)matchScore matchCount:(uint)matchCount {
@@ -106,7 +118,7 @@ static const int COST_TO_CHOOSE = 1;
 - (void)tryToMatch {
   uint matchCount = 0;
   uint matchScoreSum = 0;
-  for (Card *card in [self.chosenCardsQueue reverseObjectEnumerator]){
+  for (Card *card in [self.chosenCardsQueue reverseObjectEnumerator]) {
     assert(!card.isMatched);
     assert(card.isChosen);
     NSInteger matchScore = [card match:self.chosenCardsQueue];
@@ -126,15 +138,19 @@ static const int COST_TO_CHOOSE = 1;
   card.chosen = YES;
   [self.chosenCardsQueue addObject:card];
   NSArray<Card *> *res = [self.chosenCardsQueue copy];
-
+  
   if ([self.chosenCardsQueue count] < self.numCardMatchMode) {
-    return res;
+    return nil;
   }
   
   [self tryToMatch];
   
   if ([self.chosenCardsQueue count] == self.numCardMatchMode) {
     [self popChosenCardsQueue];
+    res = nil;
+  } else {
+    [self.cards removeObjectsInArray:res];
+    [self.chosenCardsQueue removeAllObjects];
   }
   return res;
 }
@@ -145,16 +161,26 @@ static const int COST_TO_CHOOSE = 1;
   return [self.chosenCardsQueue copy] ;
 }
 
-- (NSArray<Card *> *)chooseCardAtIndex:(NSUInteger) index{
-  Card *card = [self cardAtIndex:index];
+- (nullable NSArray<Card *> *)chooseCard:(Card *)card{
   assert(card);
   assert(!card.isMatched);
+  assert([self.cards indexOfObject:card] != NSNotFound);
   self.lastResultDescription = @"";
   
   if (card.isChosen) {
-    return [self unChooseCard:card];
+    card.chosen = NO;
+    [self.chosenCardsQueue removeObject:card];
+    return nil;
   }
   return [self chooseNewCard:card];
+}
+
+- (NSUInteger)cardsCount {
+  return self.cards.count;
+}
+
+- (NSArray<Card *> *)getCards {
+  return self.cards;
 }
 
 @end

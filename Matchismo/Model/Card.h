@@ -5,7 +5,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Object represents a card.
-@interface Card : NSObject
+@interface Card <NSCopying>: NSObject
 
 /// Card is chosen.
 @property (nonatomic, getter=isChosen) BOOL chosen;
