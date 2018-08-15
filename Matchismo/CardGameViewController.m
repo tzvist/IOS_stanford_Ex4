@@ -125,7 +125,6 @@ NS_ASSUME_NONNULL_BEGIN
     [self.cardToView setObject:cardView forKey:card];
     [self.viewToCard setObject:card forKey:cardView];
     [self.cardHolder addSubview:cardView];
-    cardView.opaque = YES;
     [cardView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchCardButton:) ]];
   }
   [self updateCardsLocation];
