@@ -4,7 +4,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface PlayingCardView()
+
+/// \c PlayCards Rank.
+@property (nonatomic) NSUInteger rank;
+
+/// \c PlayCards suit.
+@property (strong, nonatomic) NSString *suit;
+
 @property (nonatomic) CGFloat faceCardScaleFactor;
 
 @end
@@ -41,17 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
   [self setNeedsDisplay];
 }
 
-- (void)setSuit:(NSString *)suit {
-  _suit = suit;
-  [self setNeedsDisplay];
-}
-
-- (void)setRank:(NSUInteger)rank {
-  _rank = rank;
-  [self setNeedsDisplay];
-}
-
-- (void)setisChosen:(BOOL)isChosen {
+- (void)setIsChosen:(BOOL)isChosen {
   _isChosen = isChosen;
   [self setNeedsDisplay];
 }
@@ -211,6 +209,14 @@ NS_ASSUME_NONNULL_BEGIN
 -(id) copyWithZone:(NSZone *)zone {
   return self;
 }
+
+- (void)setFeturesWithRank:(NSUInteger)rank suit:(NSString *)suit
+                  isChosen:(BOOL)isChosen{
+  self.rank = rank;
+  self.suit = suit;
+  self.isChosen = isChosen;
+}
+
 
 @end
 

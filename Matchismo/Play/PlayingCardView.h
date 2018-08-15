@@ -7,14 +7,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PlayingCardView : UIView <CardView>
 
-/// \c PlayCards Rank.
-@property (nonatomic) NSUInteger rank;
-
-/// \c PlayCards suit.
-@property (strong, nonatomic) NSString *suit;
+/// Seter for view Card properties.
+- (void)setFeturesWithRank:(NSUInteger)rank suit:(NSString *)suit
+isChosen:(BOOL)isChosen;
 
 /// Is the card Chosen.
 @property (nonatomic) BOOL isChosen;
+
 @end
 
 NS_ASSUME_NONNULL_END

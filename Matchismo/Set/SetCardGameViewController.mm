@@ -8,29 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SetCardGameViewController()
-
-
-@property (strong, nonatomic) Grid *grid;
-
-
-@end
-
 @implementation SetCardGameViewController
-
-
-- (instancetype)init {
-  if (self = [super init]) {
-////    self.cardView.number = 2;
-////    self.cardView.shading = 1;
-////    self.cardView.color = 0;
-////    self.cardView.symbol = 1;
-//    self.grid = [[Grid alloc] init];
-//    self.grid.cellAspectRatio = 2.0/3.0;
-//    //self.grid.
-  }
-  return self;
-}
 
 - (Deck *)creatDeck {
   return [[SetCardDeck alloc] init];
@@ -45,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
   [self addCardViews:cards];
 }
 
-
 - (UIView<CardView> *)makeCardViewForCard:(Card *)card {
   assert([card isKindOfClass:[SetCard class]]);
   SetCard *setCard = (SetCard *)card;
@@ -53,7 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
   [setCardView setFeturesWithNumber:setCard.number symbol:setCard.symbol shading:setCard.shading color:setCard.color isChosen:setCard.isChosen];
   return setCardView;
 }
-
 
 @end
 

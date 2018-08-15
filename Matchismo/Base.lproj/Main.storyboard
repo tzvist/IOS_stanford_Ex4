@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j5v-2x-Lho">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2gr-lp-4Ws">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,31 +22,40 @@
                                 <color key="backgroundColor" red="0.31651041410000003" green="1" blue="0.53222588859999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GZ2-Pp-qLo">
-                                <rect key="frame" x="309" y="686" width="85" height="30"/>
+                                <rect key="frame" x="309" y="639" width="85" height="30"/>
                                 <state key="normal" title="ADD CARDS"/>
                                 <connections>
                                     <action selector="addThreeCards:" destination="j5v-2x-Lho" eventType="touchUpInside" id="KIu-XS-A2I"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOE-t9-UIg">
-                                <rect key="frame" x="26" y="687.66666666666663" width="62" height="20.333333333333371"/>
+                                <rect key="frame" x="26" y="644" width="62" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGw-0B-TWS">
+                                <rect key="frame" x="182" y="639" width="50" height="30"/>
+                                <state key="normal" title="re-deal"/>
+                                <connections>
+                                    <action selector="redeal" destination="j5v-2x-Lho" eventType="touchUpInside" id="Dc9-wv-Ba6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1281659621" green="0.40493442359999998" blue="0.21551658339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="p5D-pL-LbD" firstAttribute="leading" secondItem="69n-E3-aTe" secondAttribute="leading" id="2cr-qc-GEg"/>
-                            <constraint firstItem="n6E-lJ-GJ3" firstAttribute="bottom" secondItem="GZ2-Pp-qLo" secondAttribute="bottom" constant="20" id="57U-ov-Ayn"/>
                             <constraint firstItem="n6E-lJ-GJ3" firstAttribute="bottom" secondItem="p5D-pL-LbD" secondAttribute="bottom" constant="114" id="7b2-UG-PdA"/>
+                            <constraint firstItem="vOE-t9-UIg" firstAttribute="top" secondItem="p5D-pL-LbD" secondAttribute="bottom" constant="22" id="8Dl-1g-nGM"/>
                             <constraint firstItem="p5D-pL-LbD" firstAttribute="top" secondItem="n6E-lJ-GJ3" secondAttribute="top" constant="17" id="9Ds-aq-xiz"/>
+                            <constraint firstItem="GZ2-Pp-qLo" firstAttribute="top" secondItem="p5D-pL-LbD" secondAttribute="bottom" constant="17" id="9GY-JZ-KM6"/>
+                            <constraint firstItem="AGw-0B-TWS" firstAttribute="baseline" secondItem="GZ2-Pp-qLo" secondAttribute="baseline" id="D28-EX-jhk"/>
                             <constraint firstItem="vOE-t9-UIg" firstAttribute="leading" secondItem="n6E-lJ-GJ3" secondAttribute="leading" constant="26" id="GDA-ff-OV8"/>
                             <constraint firstItem="p5D-pL-LbD" firstAttribute="width" secondItem="69n-E3-aTe" secondAttribute="width" id="UqB-xM-txd"/>
                             <constraint firstItem="n6E-lJ-GJ3" firstAttribute="trailing" secondItem="GZ2-Pp-qLo" secondAttribute="trailing" constant="20" id="XAU-XW-eoo"/>
                             <constraint firstItem="GZ2-Pp-qLo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="69n-E3-aTe" secondAttribute="leading" constant="20" symbolic="YES" id="Z30-tm-0ge"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vOE-t9-UIg" secondAttribute="trailing" constant="20" symbolic="YES" id="k8Q-Lm-V5J"/>
-                            <constraint firstItem="n6E-lJ-GJ3" firstAttribute="bottom" secondItem="vOE-t9-UIg" secondAttribute="bottom" constant="28" id="tgv-v7-K0d"/>
+                            <constraint firstItem="AGw-0B-TWS" firstAttribute="centerX" secondItem="p5D-pL-LbD" secondAttribute="centerX" id="m4g-NK-R1S"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n6E-lJ-GJ3"/>
                     </view>
@@ -58,6 +67,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uiz-1b-x5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1402.8985507246377" y="-1317.3913043478262"/>
+        </scene>
+        <!--Playing Card Game View Controller-->
+        <scene sceneID="veu-hk-0In">
+            <objects>
+                <viewController id="2gr-lp-4Ws" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZId-C0-ESi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YND-gO-gxP">
+                                <rect key="frame" x="0.0" y="37" width="414" height="585"/>
+                                <color key="backgroundColor" red="0.31651041410000003" green="1" blue="0.53222588859999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score: 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dwa-fn-pRa">
+                                <rect key="frame" x="26" y="644" width="62" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nP1-KN-UGZ">
+                                <rect key="frame" x="182" y="639" width="50" height="30"/>
+                                <state key="normal" title="re-deal"/>
+                                <connections>
+                                    <action selector="redeal" destination="2gr-lp-4Ws" eventType="touchUpInside" id="THp-Nh-3Xe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.1281659621" green="0.40493442359999998" blue="0.21551658339999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Dwa-fn-pRa" secondAttribute="trailing" constant="20" symbolic="YES" id="6fh-P3-lC4"/>
+                            <constraint firstItem="YND-gO-gxP" firstAttribute="width" secondItem="ZId-C0-ESi" secondAttribute="width" id="7fg-hx-KtW"/>
+                            <constraint firstItem="Dwa-fn-pRa" firstAttribute="leading" secondItem="IrZ-a5-QO0" secondAttribute="leading" constant="26" id="BVP-ij-MyT"/>
+                            <constraint firstItem="nP1-KN-UGZ" firstAttribute="top" secondItem="YND-gO-gxP" secondAttribute="bottom" constant="17" id="DNF-Zq-RIM"/>
+                            <constraint firstItem="nP1-KN-UGZ" firstAttribute="leading" secondItem="Dwa-fn-pRa" secondAttribute="trailing" constant="94" id="K0P-kP-WXt"/>
+                            <constraint firstItem="YND-gO-gxP" firstAttribute="leading" secondItem="ZId-C0-ESi" secondAttribute="leading" id="S8T-W8-cWs"/>
+                            <constraint firstItem="YND-gO-gxP" firstAttribute="top" secondItem="IrZ-a5-QO0" secondAttribute="top" constant="17" id="X7I-BF-5LW"/>
+                            <constraint firstItem="IrZ-a5-QO0" firstAttribute="bottom" secondItem="YND-gO-gxP" secondAttribute="bottom" constant="114" id="llL-a9-1xE"/>
+                            <constraint firstItem="Dwa-fn-pRa" firstAttribute="top" secondItem="YND-gO-gxP" secondAttribute="bottom" constant="22" id="x5G-Pi-UIO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IrZ-a5-QO0"/>
+                    </view>
+                    <connections>
+                        <outlet property="cardHolder" destination="YND-gO-gxP" id="dkG-RX-OI9"/>
+                        <outlet property="scoreLable" destination="Dwa-fn-pRa" id="eRp-r4-z6R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kyW-4K-sWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2026.0869565217392" y="-1311.6847826086957"/>
         </scene>
     </scenes>
 </document>

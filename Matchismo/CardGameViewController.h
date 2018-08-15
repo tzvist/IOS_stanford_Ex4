@@ -11,33 +11,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// must implement below methods.
 @interface CardGameViewController : UIViewController
 
-/// protected
+/// protected abstract.
 - (Deck *)creatDeck;
 
-/// protected
+/// protected abstract.
 - (uint)calcCardMatchMode;
 
-/// protected
-- (void)updateButton:(UIButton *)cardButton withCard:(Card*)card;
-
-/// protected
-- (NSAttributedString *)cardConnten:(Card *)card;
-
-
-//--------------
-
-/// protected
-- (void)addCardViews:(NSArray *)cards;
-
+/// protected abstract.
 - (UIView<CardView> *)makeCardViewForCard:(Card *)card;
 
-/// protected
+/// protected.
+- (void)addCardViews:(NSArray *)cards;
+
+/// protected.
 - (void)updateAllCardViews;
 
 /// protected Models \c game.
 @property (strong, nonatomic) CardMatchingGame *game;
-
-
 
 @end
 

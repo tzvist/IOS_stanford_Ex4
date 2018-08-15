@@ -85,16 +85,8 @@ NS_ASSUME_NONNULL_BEGIN
   assert(NO);
 }
 
-- (void)updateButton:(UIButton *)cardButton withCard:(Card*)card { // abstract method
+- (UIView<CardView> *)makeCardViewForCard:(Card *)card { // abstract method
   assert(NO);
-}
-
-- (NSAttributedString *)cardConnten:(Card *)card {// abstract method
-  assert(NO);
-}
-
-- (IBAction)changeCardMatchMode {
-  self.game.numCardMatchMode = [self calcCardMatchMode];
 }
 
 - (CardMatchingGame *)createNewGame {
@@ -160,9 +152,6 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
-- (UIView<CardView> *)makeCardViewForCard:(Card *)card {
-  assert(NO);
-}
 
 @end
 
