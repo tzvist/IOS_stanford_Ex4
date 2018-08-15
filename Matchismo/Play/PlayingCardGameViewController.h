@@ -1,6 +1,7 @@
 // Created by Tzvi Straus.
 
 #import "CardGameViewController.h"
+#import "PlayingCardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
