@@ -86,17 +86,18 @@ NS_ASSUME_NONNULL_BEGIN
   [self popContext];
 }
 
-#define SQUIGGLE_WIDTH 0.12
-#define SQUIGGLE_HEIGHT 0.2
+#define SQUIGGLE_WIDTH 0.13
+#define SQUIGGLE_HEIGHT 0.21
 #define SQUIGGLE_FACTOR 1.0
 
 - (UIBezierPath *)squiggleAtPointPath:(CGPoint)point {
   CGFloat dx = self.bounds.size.width * SQUIGGLE_WIDTH / 2.0;
   CGFloat dy = self.bounds.size.height * SQUIGGLE_HEIGHT / 2.0;
-  CGFloat dsqx = dx * SQUIGGLE_FACTOR;
-  CGFloat dsqy = dy * SQUIGGLE_FACTOR;
+  CGFloat dsqx = dx * SQUIGGLE_FACTOR ;
+  CGFloat dsqy = dy * SQUIGGLE_FACTOR ;
   
   UIBezierPath *path = [[UIBezierPath alloc] init];
+  
   [path moveToPoint:CGPointMake(point.x - dx, point.y - dy)];
   [path addQuadCurveToPoint:CGPointMake(point.x + dx, point.y - dy)
                controlPoint:CGPointMake(point.x - dsqx, point.y - dy - dsqy)];
@@ -108,6 +109,13 @@ NS_ASSUME_NONNULL_BEGIN
   [path addCurveToPoint:CGPointMake(point.x - dx, point.y - dy)
           controlPoint1:CGPointMake(point.x - dx - dsqx, point.y + dy - dsqy)
           controlPoint2:CGPointMake(point.x - dx + dsqx, point.y - dy + dsqy)];
+  
+  CGAffineTransform translat  = CGAffineTransformMakeTranslation( - point.x,  - point.y);
+  CGAffineTransform rotation =  CGAffineTransformMakeRotation( M_PI * 0.5 );
+  CGAffineTransform counter_translat = CGAffineTransformInvert(translat);
+  CGAffineTransform transform = CGAffineTransformConcat(CGAffineTransformConcat(translat, rotation), counter_translat);
+  [path applyTransform:transform];
+  
   return path;
 }
 
@@ -192,11 +200,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)shadeStrips:(UIBezierPath *)path {
   CGRect bounds = path.bounds;
   
-  // create a UIBezierPath for the fill pattern
   UIBezierPath *stripes = [UIBezierPath bezierPath];
   for ( int x = 0; x < bounds.size.width; x += self.bounds.size.width/30 ) {
-    [stripes moveToPoint:CGPointMake( bounds.origin.x + x, bounds.origin.y )];
-    [stripes addLineToPoint:CGPointMake( bounds.origin.x + x, bounds.origin.y + bounds.size.height )];
+    [stripes moveToPoint:CGPointMake(bounds.origin.x + x, bounds.origin.y)];
+    [stripes addLineToPoint:CGPointMake(bounds.origin.x + x, bounds.origin.y + bounds.size.height)];
   }
   [stripes setLineWidth:0.4];
   

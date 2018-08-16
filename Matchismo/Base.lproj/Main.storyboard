@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Set-->
         <scene sceneID="mhO-sJ-cD3">
             <objects>
                 <viewController id="j5v-2x-Lho" customClass="SetCardGameViewController" sceneMemberID="viewController">
@@ -59,7 +59,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n6E-lJ-GJ3"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="gHk-GP-du2"/>
+                    <tabBarItem key="tabBarItem" title="Set" id="gHk-GP-du2"/>
                     <connections>
                         <outlet property="cardHolder" destination="p5D-pL-LbD" id="YNB-hh-vly"/>
                         <outlet property="scoreLable" destination="vOE-t9-UIg" id="ggz-le-do8"/>
@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="-3357" y="-809"/>
         </scene>
-        <!--Item-->
+        <!--Playing-->
         <scene sceneID="veu-hk-0In">
             <objects>
                 <viewController id="2gr-lp-4Ws" customClass="PlayingCardGameViewController" sceneMemberID="viewController">
@@ -127,7 +127,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IrZ-a5-QO0"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="F5M-w7-kX5"/>
+                    <tabBarItem key="tabBarItem" title="Playing" id="F5M-w7-kX5"/>
                     <connections>
                         <outlet property="cardHolder" destination="YND-gO-gxP" id="dkG-RX-OI9"/>
                         <outlet property="scoreLable" destination="Dwa-fn-pRa" id="eRp-r4-z6R"/>

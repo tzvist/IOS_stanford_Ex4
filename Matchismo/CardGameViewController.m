@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
    object:[UIDevice currentDevice]];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated{
   [self updateAllCardViews];
 }
 
@@ -127,18 +127,41 @@ NS_ASSUME_NONNULL_BEGIN
     [self.cardHolder addSubview:cardView];
     [cardView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchCardButton:) ]];
   }
-  [self updateCardsLocation];
+  if(cards.count == self.cardHolder.subviews.count){
+    [self updateCardsLocation];
+  }else {
+    [self updateCardsLocationWithDuration:1];
+  }
 }
 
 - (void)updateCardsLocation {
+  Grid * grid = [self getGrid];
+  NSUInteger row = 0, column = 0;
+  for (UIView *cardView in self.cardHolder.subviews) {
+    [cardView setFrame:[grid frameOfCellAtRow:row inColumn:column]];
+    column++;
+    if ([grid columnCount] == column){
+      column = 0;
+      row++;
+    }
+  }
+  [self.cardHolder setNeedsDisplay];
+}
+
+- (Grid *)getGrid {
   Grid *grid = [[Grid alloc] init];
   grid.size = self.cardHolder.frame.size;
   grid.minimumNumberOfCells = self.cardHolder.subviews.count;
   grid.cellAspectRatio = 2.0 / 3.0;
+  return grid;
+}
+
+- (void)updateCardsLocationWithDuration:(NSUInteger)Duration {
+  Grid * grid = [self getGrid];
   NSUInteger row = 0, column = 0;
   for (UIView *cardView in self.cardHolder.subviews) {
     CGRect currFram = [grid frameOfCellAtRow:row inColumn:column];
-    [UIView animateWithDuration:3.0
+    [UIView animateWithDuration:Duration
                           delay:0.0
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^{ [cardView setFrame:currFram]; }
