@@ -124,6 +124,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)pushContextAndRotateUpsideDown {
   CGContextRef context = UIGraphicsGetCurrentContext();
   CGContextSaveGState(context);
+  
   CGContextTranslateCTM(context, self.bounds.size.width, self.bounds.size.height);
   CGContextRotateCTM(context, M_PI);
 }

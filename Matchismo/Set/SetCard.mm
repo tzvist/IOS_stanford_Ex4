@@ -37,10 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)allDifferentArray:(NSArray *)numbers {
   for (int i = 0 ; i < numbers.count; i++) {
-    long num1 = [numbers[i] longValue];
     for (int j = 0 ; j < i; j++) {
-      long num2 = [numbers[j] longValue];
-      if (num1 == num2) {
+      if ([numbers[i] isEqual: numbers[j]]) {
        return NO;
       }
     }
