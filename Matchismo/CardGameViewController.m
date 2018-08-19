@@ -8,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CardGameViewController ()
+@interface CardGameViewController()
 
 /// Score lable.
 @property (weak, nonatomic) IBOutlet UILabel *scoreLable;
