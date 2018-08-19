@@ -1,7 +1,7 @@
 // Created by Tzvi Straus.
 
 #import <UIkit/UIkit.h>
-#import "cardView.h"
+#import "CardView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

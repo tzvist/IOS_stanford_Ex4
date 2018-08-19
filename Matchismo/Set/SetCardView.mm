@@ -239,7 +239,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 #pragma mark - other
--(id) copyWithZone:(NSZone *)zone {
+
+-(id) copyWithZone:(nullable NSZone *)zone {
   return self;
 }
 

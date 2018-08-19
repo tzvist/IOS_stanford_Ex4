@@ -47,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		6010CA332122BBDA008E68F9 /* CardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
-		6010CA352122F16E008E68F9 /* CardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
 		603D35062107155200EF16C6 /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		603D35092107155200EF16C6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		603D350A2107155200EF16C6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -117,7 +116,6 @@
 		603D34FD2107155200EF16C6 = {
 			isa = PBXGroup;
 			children = (
-				6010CA332122BBDA008E68F9 /* CardView.h */,
 				603D35082107155200EF16C6 /* Matchismo */,
 				603D35212107155200EF16C6 /* MatchismoTests */,
 				603D352C2107155200EF16C6 /* MatchismoUITests */,
@@ -141,7 +139,7 @@
 				60F3FF3C211B344900A5E7AC /* Play */,
 				60F3FF3A211B340600A5E7AC /* Set */,
 				603D350C2107155200EF16C6 /* CardGameViewController.h */,
-				6010CA352122F16E008E68F9 /* CardView.h */,
+				6010CA332122BBDA008E68F9 /* CardView.h */,
 				603D350D2107155200EF16C6 /* CardGameViewController.m */,
 				60F3FF48212071BE00A5E7AC /* Grid.mm */,
 				60F3FF49212071BE00A5E7AC /* Grid.h */,

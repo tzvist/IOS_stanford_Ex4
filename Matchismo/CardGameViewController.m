@@ -122,6 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addCardViews:(NSArray *)cards {
   for (Card *card in cards) {
     UIView<CardView> *cardView = [self makeCardViewForCard:card];
+    
     [self.cardToView setObject:cardView forKey:card];
     [self.viewToCard setObject:card forKey:cardView];
     [self.cardHolder addSubview:cardView];
