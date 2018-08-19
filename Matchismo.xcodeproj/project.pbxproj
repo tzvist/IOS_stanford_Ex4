@@ -140,7 +140,6 @@
 			children = (
 				60F3FF3C211B344900A5E7AC /* Play */,
 				60F3FF3A211B340600A5E7AC /* Set */,
-				60ABEDE62111DA710080DD4E /* Model */,
 				603D350C2107155200EF16C6 /* CardGameViewController.h */,
 				6010CA352122F16E008E68F9 /* CardView.h */,
 				603D350D2107155200EF16C6 /* CardGameViewController.m */,
@@ -186,13 +185,6 @@
 				603D35182107155200EF16C6 /* main.m */,
 			);
 			path = "Other ";
-			sourceTree = "<group>";
-		};
-		60ABEDE62111DA710080DD4E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		60F3FF3A211B340600A5E7AC /* Set */ = {
